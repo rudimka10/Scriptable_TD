@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c17c1921006a0a8469f0206b704cb06d, type: 3}
+  m_Name: Dark Mage Data
+  m_EditorClassIdentifier: 
+  _enemyType: 2
+  _hp: 50
+  _coinsFrom: 20
+  _coinsTo: 30
+  _speed: 5
+  _damage: 30
