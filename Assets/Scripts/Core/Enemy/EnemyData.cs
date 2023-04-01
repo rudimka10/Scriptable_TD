@@ -9,16 +9,16 @@ namespace Core.Enemy
         [SerializeField] private int _hp;
         [SerializeField] private int _coinsFrom;
         [SerializeField] private int _coinsTo;
+        [SerializeField] private int _damage;
         [SerializeField] private float _speed;
-        [SerializeField] private float _damage;
 
         public EnemyType EnemyType => _enemyType;
         public int HP => _hp;
         public int СoinsFrom => _coinsFrom;
         public int СoinsTo => _coinsTo;
+        public int Damage => _damage;
         public float Speed => _speed;
-        public float Damage => _damage;
-    
+
     
     }
 }

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Zombie Data
   m_EditorClassIdentifier: 
   _enemyType: 4
-  _hp: 20
+  _hp: 60
   _coinsFrom: 7
   _coinsTo: 15
-  _speed: 7
-  _damage: 10
+  _damage: 5
+  _speed: 2

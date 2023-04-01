@@ -13,4 +13,15 @@ MonoBehaviour:
   m_Name: Wave 1 Data
   m_EditorClassIdentifier: 
   _waveNumber: 1
-  _duration: 10
+  _duration: 20
+  _enemiesToSpawn:
+  - {fileID: 535736535, guid: 28ee058657044a5488d2e26a470cd961, type: 3}
+  - {fileID: 535736535, guid: 28ee058657044a5488d2e26a470cd961, type: 3}
+  - {fileID: 535736535, guid: 28ee058657044a5488d2e26a470cd961, type: 3}
+  - {fileID: 1834308615, guid: 75480a5e136b10244804c9fa03e6707c, type: 3}
+  - {fileID: 1834308615, guid: 75480a5e136b10244804c9fa03e6707c, type: 3}
+  - {fileID: 2144298757, guid: 3f1ea028ed7e46f4a95b57f35cb1cbc7, type: 3}
+  - {fileID: 2144298757, guid: 3f1ea028ed7e46f4a95b57f35cb1cbc7, type: 3}
+  - {fileID: 610570300, guid: 2553e0cb4d2e4564890f43acfdc62aa5, type: 3}
+  - {fileID: 610570300, guid: 2553e0cb4d2e4564890f43acfdc62aa5, type: 3}
+  - {fileID: 610570300, guid: 2553e0cb4d2e4564890f43acfdc62aa5, type: 3}

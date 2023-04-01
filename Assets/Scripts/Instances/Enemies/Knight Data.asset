@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Knight Data
   m_EditorClassIdentifier: 
   _enemyType: 3
-  _hp: 10
-  _coinsFrom: 5
-  _coinsTo: 10
-  _speed: 20
-  _damage: 5
+  _hp: 100
+  _coinsFrom: 20
+  _coinsTo: 30
+  _damage: 30
+  _speed: 1

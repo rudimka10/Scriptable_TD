@@ -15,6 +15,6 @@ MonoBehaviour:
   _towerType: 2
   _buildPrice: 75
   _cellPrice: 5
-  _range: 15
-  _attack: 7
+  _attack: 10
+  _range: 5
   _shootInterval: 3

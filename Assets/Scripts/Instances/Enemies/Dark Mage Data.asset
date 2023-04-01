@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Dark Mage Data
   m_EditorClassIdentifier: 
   _enemyType: 2
-  _hp: 50
-  _coinsFrom: 20
-  _coinsTo: 30
+  _hp: 10
+  _coinsFrom: 5
+  _coinsTo: 10
+  _damage: 10
   _speed: 5
-  _damage: 30
