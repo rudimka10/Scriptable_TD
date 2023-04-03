@@ -1,4 +1,4 @@
-namespace Tower
+namespace Core.Tower
 {
     public enum TowerType
     {

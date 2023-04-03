@@ -2,17 +2,16 @@ using UnityEngine;
 
 namespace Core.TowerSlot
 {
-    public class TowerSlot : MonoBehaviour
+    [RequireComponent(typeof(Collider2D))]
+    public abstract class GameElementClickListener : MonoBehaviour
     {
-        [SerializeField] private GameObject _upgradeMenu;
-        
-        void Update()
+        private void Update()
         {
             if (Input.GetMouseButtonDown(0))
             {
                 RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-        
-                if (hit.collider != null && hit.collider.gameObject == gameObject)
+                
+                if (hit.collider != null && (hit.collider.gameObject == gameObject || hit.collider.gameObject.transform.IsChildOf(gameObject.transform)))
                 {
                     OnClickInside();
                 }
@@ -22,16 +21,10 @@ namespace Core.TowerSlot
                 }
             }
         }
+        protected abstract void OnClickInside();
+        protected abstract void OnClickOutside();
 
-        void OnClickInside()
-        {
-            _upgradeMenu.SetActive(true);
-        }
 
-        void OnClickOutside()
-        {
-            _upgradeMenu.SetActive(false);
-        }
-        
+
     }
 }

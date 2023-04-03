@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Linq;
 using Core.Wave;
@@ -16,12 +17,31 @@ namespace Core
         public ReactiveProperty<int> PlayerHealth = new();
         public ReactiveProperty<int> CurrentWaveIndex = new();
         public ReactiveProperty<int> Coins = new();
-        
+
+        public event Action OnWin; 
+        public event Action OnLose; 
+
         public int WavesCount => _waves.Length;
         
         private void Start()
         {
             StartGame();
+            PlayerHealth.ValueChanged += () =>
+            {
+                if (PlayerHealth.Value <= 0)
+                {
+                    StopAllCoroutines();
+                    foreach (var enemy in _spawner.CurrentEnemies)
+                    {
+                        if (enemy != null)
+                        {
+                            Destroy(enemy.gameObject);
+                        }
+                    }
+                    OnLose?.Invoke();
+                }
+            };
+            
         }
 
         private void StartGame()
@@ -43,13 +63,34 @@ namespace Core
             {
                 nextIndex = CurrentWaveIndex.Value + 1;
             }
+
+            if (!_waves.Select(x => x.WaveNumber).Contains(nextIndex))
+            {
+                StartCoroutine(CheckWinningRoutine());
+                return;
+            }
+            
             StartCoroutine(StartWave(_waves.FirstOrDefault(x => x.WaveNumber == nextIndex)));
+        }
+
+        private IEnumerator CheckWinningRoutine()
+        {
+            while (true)
+            {
+                if (_spawner.CurrentEnemies.Count == 0)
+                {
+                    break;
+                }
+
+                yield return new WaitForEndOfFrame();
+            }
+            
+            OnWin?.Invoke();
         }
         
         private IEnumerator StartWave(WaveData wave)
         {
             CurrentWaveIndex.Value = wave.WaveNumber;
-            Debug.Log($"Current wave index = {CurrentWaveIndex.Value}");
             StartCoroutine(StartWaveDurationCheck(wave.Duration));
             for (int i = 0; i < wave.EnemiesToSpawn.Count; i++)
             {

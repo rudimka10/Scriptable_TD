@@ -34,7 +34,6 @@ namespace Core.Tower
         {
             if (col.CompareTag("Enemy"))
             {
-                Debug.Log("hit enemy!");
                 var enemy = col.gameObject.GetComponent<Enemy.Enemy>();
                 enemy.DealDamageToEnemy(_damage);
                 Destroy(gameObject);

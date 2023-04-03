@@ -14,6 +14,8 @@ namespace Core.Enemy
         private float _distanceTraveled;
 
         public float DistanceTraveled => _distanceTraveled;
+
+        public event Action OnEnemyDied;
         
         public void Init(Transform target)
         {
@@ -45,6 +47,7 @@ namespace Core.Enemy
             {
                 StopAllCoroutines();
                 LevelController.Instance.PlayerHealth.Value -= _enemyData.Damage;
+                OnEnemyDied?.Invoke();
                 Destroy(gameObject);
             }
         }
@@ -55,6 +58,7 @@ namespace Core.Enemy
             
             if (_currentHealthLose >= _enemyData.HP)
             {
+                OnEnemyDied?.Invoke();
                 LevelController.Instance.Coins.Value += Random.Range(_enemyData.СoinsFrom, _enemyData.СoinsTo);
                 Destroy(gameObject);
             }

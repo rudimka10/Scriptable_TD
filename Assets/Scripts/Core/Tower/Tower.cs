@@ -1,60 +1,44 @@
-using Tower;
+using Core.TowerSlot;
 using UnityEngine;
 
 namespace Core.Tower
 {
-    public class Tower : MonoBehaviour
+    public class Tower : GameElementClickListener, ISeller
     {
         [SerializeField] private TowerData _towerData;
-        [SerializeField] private ArcherTowerProjectile _towerProjectile;
-        private float nextFireTime = 0f;
-        private Transform target;
+        [SerializeField] private Shooter _shooter;
+        [SerializeField] private TowerMenu _towerMenu;
 
-        private void Update()
+        private IChangeState _changeState;
+
+        public TowerData TowerData => _towerData;
+
+        public void Init(IChangeState changeState)
         {
-            if (Time.time > nextFireTime)
-            {
-                FindTarget();
-                if (target != null)
-                {
-                    Shoot();
-                    nextFireTime = Time.time + _towerData.ShootInterval;
-                }
-            }
+            _changeState = changeState;
+            _shooter.Construct(_towerData.Attack, _towerData.Range, _towerData.ShootInterval);
+            _towerMenu.Init(this, _towerData.CellPrice);
         }
 
-        private void Shoot()
+        protected override void OnClickInside()
         {
-            var projectile = Instantiate(_towerProjectile, transform.position, transform.rotation);
-            projectile.Construct(target, _towerData.Attack);
+            _towerMenu.gameObject.SetActive(true);
         }
 
-
-        private void FindTarget()
+        protected override void OnClickOutside()
         {
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y),
-                _towerData.Range);
-            float closestDistance = Mathf.NegativeInfinity;
-
-            foreach (var collider in colliders)
-            {
-                if (collider.CompareTag("Enemy"))
-                {
-                    Enemy.Enemy enemy = collider.GetComponent<Enemy.Enemy>();
-
-                    if (closestDistance < enemy.DistanceTraveled)
-                    {
-                        closestDistance = enemy.DistanceTraveled;
-                        target = collider.transform;
-                    }
-                }
-            }
+            _towerMenu.gameObject.SetActive(false);
         }
 
-        private void OnDrawGizmosSelected()
+        public void AskSell()
         {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, _towerData.Range);
+            LevelController.Instance.Coins.Value += _towerData.CellPrice;
+            _changeState.SetState(SpotState.Empty);
         }
+    }
+
+    public interface ISeller
+    {
+        public void AskSell();
     }
 }

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _towerType: 1
   _buildPrice: 100
-  _cellPrice: 10
+  _cellPrice: 100
   _attack: 10
   _range: 3
   _shootInterval: 2
