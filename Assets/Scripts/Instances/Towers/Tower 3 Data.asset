@@ -17,4 +17,4 @@ MonoBehaviour:
   _cellPrice: 50
   _attack: 15
   _range: 3
-  _shootInterval: 2
+  _shootInterval: 1
